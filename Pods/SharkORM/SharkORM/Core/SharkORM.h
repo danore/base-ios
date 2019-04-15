@@ -692,8 +692,8 @@ typedef void(^SRKCommitOptionsBlock)();
 
 /// The primary key column, this is common and mandatory across all persistable classes.  In this case it is forced to NSString* to allow string primary keys in Swift.
 
-@property (nonatomic, strong)   NSString* Id;
-#pragma clang diagnostic pop
+@property (nonatomic, strong)   NSNumber* Id;
+#pragma clang diagnostic push
 
 @end
 

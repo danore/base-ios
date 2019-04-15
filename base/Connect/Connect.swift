@@ -29,8 +29,8 @@ class Connect {
     /// - Parameters:
     ///   - url: String
     ///   - params: Parameteres
-    ///   - completionHandler: CompletionHandler
-    func post(_ url: String, params: Parameters, completionHandler: @escaping (JSON, Int) -> ()) {
+    ///   - completionHandler: (JSON)
+    func post(_ url: String, params: Parameters, completionHandler: @escaping (JSON) -> ()) {
         let manager = Alamofire.Session.default
         manager.session.configuration.timeoutIntervalForRequest = 15
 
@@ -43,20 +43,20 @@ class Connect {
                     if(httpCode == HttpCode.success.rawValue || httpCode == HttpCode.created.rawValue){
                         let jsonData = try! JSON(data: response.data!)
 
-                        completionHandler(jsonData, httpCode!)
+                        completionHandler(jsonData)
                     }else if(httpCode == HttpCode.authorized.rawValue){
-                        completionHandler(JSON.null, httpCode!)
+                        completionHandler(JSON.null)
                     }else{
                         if(response.data!.count > 0){
                             let jsonData = try! JSON(data: response.data!)
 
-                            completionHandler(jsonData, httpCode!)
+                            completionHandler(jsonData)
                         }else{
-                            completionHandler(JSON.null, httpCode!)
+                            completionHandler(JSON.null)
                         }
                     }
                 case .failure(_):
-                    completionHandler(JSON.null, HttpCode.server_error.rawValue)
+                    completionHandler(JSON.null)
                 }
         }
     }
@@ -65,11 +65,9 @@ class Connect {
     ///
     /// - Parameters:
     ///   - url: String
-    ///   - controller: String
     ///   - params: Parameteres
-    ///   - type: Int
-    ///   - completionHandler: CompletionHandler
-    func put(_ url: String, params: Parameters, completionHandler: @escaping (JSON, Int) -> ()) {
+    ///   - completionHandler: (JSON)
+    func put(_ url: String, params: Parameters, completionHandler: @escaping (JSON) -> ()) {
         let manager = Alamofire.Session.default
         manager.session.configuration.timeoutIntervalForRequest = 15
 
@@ -82,20 +80,20 @@ class Connect {
                     if(httpCode == HttpCode.success.rawValue){
                         let jsonData = try! JSON(data: response.data!)
 
-                        completionHandler(jsonData, httpCode!)
+                        completionHandler(jsonData)
                     }else if(httpCode == HttpCode.authorized.rawValue){
-                        completionHandler(JSON.null, httpCode!)
+                        completionHandler(JSON.null)
                     }else{
                         if(response.data!.count > 0){
                             let jsonData = try! JSON(data: response.data!)
 
-                            completionHandler(jsonData, httpCode!)
+                            completionHandler(jsonData)
                         }else{
-                            completionHandler(JSON.null, httpCode!)
+                            completionHandler(JSON.null)
                         }
                     }
                 case .failure(_):
-                    completionHandler(JSON.null, HttpCode.server_error.rawValue)
+                    completionHandler(JSON.null)
                 }
         }
     }
@@ -104,11 +102,9 @@ class Connect {
     ///
     /// - Parameters:
     ///   - url: String
-    ///   - controller: String
     ///   - params: Parameteres
-    ///   - type: Int
-    ///   - completionHandler: CompletionHandler
-    func patch(_ url: String, params: Parameters, completionHandler: @escaping (JSON, Int) -> ()) {
+    ///   - completionHandler: (JSON)
+    func patch(_ url: String, params: Parameters, completionHandler: @escaping (JSON) -> ()) {
         let manager = Alamofire.Session.default
         manager.session.configuration.timeoutIntervalForRequest = 15
 
@@ -117,24 +113,24 @@ class Connect {
                 switch response.result {
                 case .success(_):
                     let httpCode = response.response?.statusCode
-
+                    
                     if(httpCode == HttpCode.success.rawValue){
                         let jsonData = try! JSON(data: response.data!)
                         
-                        completionHandler(jsonData, httpCode!)
+                        completionHandler(jsonData)
                     }else if(httpCode == HttpCode.authorized.rawValue){
-                        completionHandler(JSON.null, httpCode!)
+                        completionHandler(JSON.null)
                     }else{
                         if(response.data!.count > 0){
                             let jsonData = try! JSON(data: response.data!)
                             
-                            completionHandler(jsonData, httpCode!)
+                            completionHandler(jsonData)
                         }else{
-                            completionHandler(JSON.null, httpCode!)
+                            completionHandler(JSON.null)
                         }
                     }
                 case .failure(_):
-                    completionHandler(JSON.null, HttpCode.server_error.rawValue)
+                    completionHandler(JSON.null)
                 }
         }
     }
@@ -143,8 +139,8 @@ class Connect {
     ///
     /// - Parameters:
     ///   - url: String
-    ///   - completionHandler: CompletionHandler
-    func get(_ url: String, completionHandler: @escaping (JSON, Int) -> ()) {
+    ///   - completionHandler: (JSON)
+    func get(_ url: String, completionHandler: @escaping (JSON) -> ()) {
         let manager = Alamofire.Session.default
         manager.session.configuration.timeoutIntervalForRequest = 15
 
@@ -153,24 +149,24 @@ class Connect {
                 switch response.result {
                 case .success(_):
                     let httpCode = response.response?.statusCode
-
+                    
                     if(httpCode == HttpCode.success.rawValue){
                         let jsonData = try! JSON(data: response.data!)
                         
-                        completionHandler(jsonData, httpCode!)
+                        completionHandler(jsonData)
                     }else if(httpCode == HttpCode.authorized.rawValue){
-                        completionHandler(JSON.null, httpCode!)
+                        completionHandler(JSON.null)
                     }else{
                         if(response.data!.count > 0){
                             let jsonData = try! JSON(data: response.data!)
                             
-                            completionHandler(jsonData, httpCode!)
+                            completionHandler(jsonData)
                         }else{
-                            completionHandler(JSON.null, httpCode!)
+                            completionHandler(JSON.null)
                         }
                     }
                 case .failure(_):
-                    completionHandler(JSON.null, HttpCode.server_error.rawValue)
+                    completionHandler(JSON.null)
                 }
         }
     }
@@ -180,10 +176,8 @@ class Connect {
     /// - Parameters:
     ///   - url: String
     ///   - params: Parameters Almofire
-    ///   - isLogin: Bool
-    ///   - isBasic: Bool
-    ///   - completionHandler: (JSON, NSError?)
-    func get(url: String, params: Parameters, isLogin: Bool, isBasic: Bool, completionHandler: @escaping (JSON, Int) -> ()) {
+    ///   - completionHandler: (JSON)
+    func get(url: String, params: Parameters, completionHandler: @escaping (JSON) -> ()) {
         let manager = Alamofire.Session.default
         manager.session.configuration.timeoutIntervalForRequest = 15
 
@@ -196,20 +190,20 @@ class Connect {
                     if(httpCode == HttpCode.success.rawValue){
                         let jsonData = try! JSON(data: response.data!)
                         
-                        completionHandler(jsonData, httpCode!)
+                        completionHandler(jsonData)
                     }else if(httpCode == HttpCode.authorized.rawValue){
-                        completionHandler(JSON.null, httpCode!)
+                        completionHandler(JSON.null)
                     }else{
                         if(response.data!.count > 0){
                             let jsonData = try! JSON(data: response.data!)
                             
-                            completionHandler(jsonData, httpCode!)
+                            completionHandler(jsonData)
                         }else{
-                            completionHandler(JSON.null, httpCode!)
+                            completionHandler(JSON.null)
                         }
                     }
                 case .failure(_):
-                    completionHandler(JSON.null, HttpCode.server_error.rawValue)
+                    completionHandler(JSON.null)
                 }
         }
     }
@@ -219,8 +213,8 @@ class Connect {
     /// - Parameters:
     ///   - url: String
     ///   - params: Parameteres
-    ///   - completionHandler: CompletionHandler
-    func delete(_ url: String, params: Parameters, completionHandler: @escaping (JSON, Int) -> ()) {
+    ///   - completionHandler: (JSON)
+    func delete(_ url: String, params: Parameters, completionHandler: @escaping (JSON) -> ()) {
         let manager = Alamofire.Session.default
         manager.session.configuration.timeoutIntervalForRequest = 15
 
@@ -229,24 +223,24 @@ class Connect {
                 switch response.result {
                 case .success(_):
                     let httpCode = response.response?.statusCode
-
-                    if(ResponseCode.response(httpCode!)){
+                    
+                    if(httpCode == HttpCode.success.rawValue){
                         let jsonData = try! JSON(data: response.data!)
-
-                        completionHandler(jsonData, httpCode!)
-                    }else if(response.response?.statusCode == HttpCode.authorized.rawValue){
-                        completionHandler(JSON.null, httpCode!)
+                        
+                        completionHandler(jsonData)
+                    }else if(httpCode == HttpCode.authorized.rawValue){
+                        completionHandler(JSON.null)
                     }else{
                         if(response.data!.count > 0){
                             let jsonData = try! JSON(data: response.data!)
-
-                            completionHandler(jsonData, httpCode!)
+                            
+                            completionHandler(jsonData)
                         }else{
-                            completionHandler(JSON.null, httpCode!)
+                            completionHandler(JSON.null)
                         }
                     }
                 case .failure(_):
-                    completionHandler(JSON.null, HttpCode.server_error.rawValue)
+                    completionHandler(JSON.null)
                 }
         }
     }
