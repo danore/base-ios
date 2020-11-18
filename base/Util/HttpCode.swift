@@ -10,14 +10,41 @@ import Foundation
 
 enum HttpCode: Int {
     
-    case success = 200
-    case created = 201
-    case not_content = 204
-    case bad_request = 400
-    case authorized = 401
-    case forbidden = 403
-    case not_found = 404
-    case method_not_allowed = 405
-    case server_error = 500
+    case success
+    case created
+    case not_content
+    case bad_request
+    case authorized
+    case forbidden
+    case not_found
+    case method_not_allowed
+    case server_error
+    
+    /// Get http code
+    ///
+    /// - Parameter httpCode: Int http code
+    /// - Returns:  HttpCode custon class
+    static func code(_ httpCode: Int) ->HttpCode {
+        switch httpCode {
+        case 200:
+            return .success
+        case 201:
+            return .created
+        case 204:
+            return .not_content
+        case 400:
+            return .bad_request
+        case 401:
+            return .authorized
+        case 403:
+            return .forbidden
+        case 404:
+            return .not_found
+        case 405:
+            return .method_not_allowed
+        default:
+            return .server_error
+        }
+    }
     
 }

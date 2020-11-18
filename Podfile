@@ -2,17 +2,16 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '12.2'
+platform :ios, '14.1'
 
 target 'base' do
   use_frameworks!
 
-  pod 'Alamofire', '~> 5.0.0-beta.3'
-  pod 'AlamofireImage', '~> 4.0.0-beta.1'
+  pod 'Alamofire', '~> 5.2'
+  pod 'AlamofireImage', '~> 4.1'
   pod 'SwiftyJSON', '~> 4.0'
-  pod 'Firebase/Core'
   pod 'Firebase/Messaging'
-  pod 'Crashlytics', '~> 3.10.7'
+  pod 'Firebase/Crashlytics'
   pod "SharkORM", '~> 2.1.3', :inhibit_warnings => true
 end
 

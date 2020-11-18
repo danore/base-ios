@@ -17,8 +17,8 @@ class Api {
     /// - Parameters:
     ///   - params: Parameters Alamofire
     ///   - completionHandler: (JSON)
-    static func login(_ params: Parameters, completionHandler: @escaping (JSON) -> ()){
-        Connect().post(Uri().login, params: params, completionHandler: completionHandler)
+    static func login(_ params: Parameters, completionHandler: @escaping (JSON, HttpCode) -> ()){
+        Connect.shared.request(Uri().login, httpMethod: .post, completionHandler: completionHandler)
     }
     
 }
